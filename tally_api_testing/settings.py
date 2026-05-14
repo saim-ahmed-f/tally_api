@@ -168,13 +168,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # URL for static files (public URL)
 STATIC_URL = '/static/'
 
-# Custom static file directories (optional)
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static_src'),  # Your custom static directory
-]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# Collect static files into 'static/' directory
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static_src'),
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
