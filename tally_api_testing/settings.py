@@ -115,22 +115,11 @@ WSGI_APPLICATION = 'tally_api_testing.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
-    # ,
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'u231626708_vansales',      # Replace with your DB name
-        'USER': 'u231626708_vansales',         # Replace with your DB user
-        'PASSWORD': '7cc]h4rh!J', # Replace with your DB password
-        'HOST': 'srv1666.hstgr.io',               # Or your DB server IP
-        'PORT': '3306',                    # Default MySQL port
-        # 'OPTIONS': {
-        #     'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
-        # }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
+    
 }
 
 
