@@ -40,11 +40,13 @@ class CustomerWriteSerializerTally(serializers.ModelSerializer):
 
 #? Tally & Voucher Serializer 
 class TallyCustomerSerializer(serializers.ModelSerializer):
-    customerName = serializers.CharField(source='customerName')
-    customerId = serializers.CharField(source = 'customerId')
+    customerName = serializers.CharField()
+    customerId = serializers.CharField()
+    customerGUID = serializers.CharField()
+    customerCode = serializers.CharField()
 
     class Meta:
         model = Customer
-        fields = ['customerId' ,'customerName']
+        fields = ['customerId' , 'customerGUID' , 'customerCode' ,'customerName']
 
 

@@ -86,6 +86,7 @@ class VoucherSerializerForTally(serializers.ModelSerializer):
         model = Voucher
         fields = [
             'voucherId',
+            # 'voucherGUID',
             'voucherDate',
             'voucherNumber',
             'voucherRemark',

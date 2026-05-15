@@ -100,11 +100,13 @@ class SalesmanSerializer(serializers.ModelSerializer):
 #? Salesman Serializer for Voucher
 
 class SalesmanSerializerForVoucher(serializers.ModelSerializer):
-    salesmanName = serializers.CharField(source='salesmanName')
+    salesmanName = serializers.CharField()
+    salesmanGUID = serializers.CharField()
+    salesmanCode = serializers.CharField()
     # Use the nested serializer here
     # customerName = CustomerSerializer_tally(source='customers', many=True)
 
     class Meta:
         model = Salesman
-        fields = ['salesmanId', 'salesmanName']
+        fields = ['salesmanId' , 'salesmanGUID' , 'salesmanCode', 'salesmanName']
 
