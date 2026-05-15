@@ -173,19 +173,39 @@ def create_voucher(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+# @api_view(["POST"])
+# def voucher_commit(request):
+#     completed = []
+#     try:
+#         for data in list(request.data["voucherNumber"]):
+#             v = Voucher.objects.get(pk = data)
+#             v.onTally = True
+#             v.save()
+#             completed.append(data)
+#     except Exception:
+#         for data_back in completed:
+#             v = Voucher.objects.get(pk = data_back)
+#             v.onTally = False
+#             v.save()
+#         return Response({"status" : False},status=status.HTTP_400_BAD_REQUEST)
+#     return Response({"status" : True}, status=status.HTTP_200_OK)
+
+
 @api_view(["POST"])
 def voucher_commit(request):
-    completed = []
+    completedTillError = []
     try:
-        for data in list(request.data["voucherNumber"]):
-            v = Voucher.objects.get(pk = data)
+        for key , value in dict(request.data).items():
+            v = Voucher.objects.get(pk = key)
+            v.voucherGUID = value
             v.onTally = True
             v.save()
-            completed.append(data)
-    except Exception:
-        for data_back in completed:
+            completedTillError.append(key)
+    except Exception as e:
+        for data_back in completedTillError:
             v = Voucher.objects.get(pk = data_back)
             v.onTally = False
+            v.voucherGUID = None
             v.save()
-        return Response({"status" : False},status=status.HTTP_400_BAD_REQUEST)
+        return Response({"status" : False , "details" : str(e)},status=status.HTTP_400_BAD_REQUEST)
     return Response({"status" : True}, status=status.HTTP_200_OK)
