@@ -172,7 +172,7 @@ def get_voucher_search_by_cust_Salesman(request):
                                                             'rate',
                                                             'quantity')
                                             .first())
-            return Response({"status" : True , "data" : allVoucherForSalesman_Customer} , status=status.HTTP_201_CREATED)
+            return Response({"status" : True , "data" : allVoucherForSalesman_Customer} , status=status.HTTP_200_OK)
         except Exception as e:
                     return Response({"status" : False , "data" : "No Reconds Available"} , status=status.HTTP_404_NOT_FOUND)
     else:
