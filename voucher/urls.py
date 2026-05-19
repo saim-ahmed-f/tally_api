@@ -11,6 +11,9 @@ urlpatterns = [
 
     path('voucherForToday/', voucherNumberForToday, name='voucher_list'),
 
+    path('get/historicRate/' , get_voucher_search_by_cust_Salesman , name="Get Historic Rate of the Customer"),
+
+
     #! Tally API's
     path('tally/getAll/', voucher_list, name='voucher_list'),
     path("tally/post/" , create_voucher , name="Create Voucher"),

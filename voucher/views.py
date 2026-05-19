@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.db.models import Q
+from django.db.models import F
 # voucher/views.py
 
 from rest_framework.decorators import api_view
@@ -146,6 +147,37 @@ def voucher_create_or_update(request):
 
     else:
         return Response({"status" : "Please provide the voucherId"} , status=status.HTTP_400_BAD_REQUEST)
+
+
+
+@api_view(['POST'])
+def get_voucher_search_by_cust_Salesman(request):
+    customerId = request.data.get('customerId')
+    salesmanId = request.data.get('salesmanId')
+    productId = request.data.get('productId')
+
+    if customerId and salesmanId and productId:
+
+        try:
+
+            allVoucherForSalesman_Customer = ( Voucher.objects
+                                            .filter(salesman_id = salesmanId)
+                                            .filter(customer_id = customerId)
+                                            .filter(allInventory__product_id = productId)
+                                            .order_by('-voucherDate')
+                                            .annotate(
+                                                        rate=F('allInventory__rate'),
+                                                        quantity=F('allInventory__quantity'))
+                                            .values('voucherDate',
+                                                            'rate',
+                                                            'quantity')
+                                            .first())
+            return Response({"status" : True , "data" : allVoucherForSalesman_Customer} , status=status.HTTP_201_CREATED)
+        except Exception as e:
+                    return Response({"status" : False , "data" : "No Reconds Available"} , status=status.HTTP_404_NOT_FOUND)
+    else:
+        return Response({"status" : False , "data" : "Please Provide Customer Id , Salesman Id and Product Id"} , status=status.HTTP_404_NOT_FOUND)
+
 
 
 #! Tally API
